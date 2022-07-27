@@ -113,10 +113,6 @@ All parameters and configuration objects appear in the **CONFIGURATION** tab.
 
 ### Hyperparameters
 
-:::important
-In older versions of ClearML Server, the **CONFIGURATION** tab was named **HYPER PARAMETERS**, and it contained all parameters. The renamed tab contains a **HYPER PARAMETER** section, and subsections for hyperparameter groups.
-:::
-
 Hyperparameters are grouped by their type and appear in **CONFIGURATION** **>** **HYPER PARAMETERS**.
 
 #### Command Line Arguments
@@ -165,10 +161,6 @@ ClearML supports providing a name for a Task model configuration object (see the
 parameter in [`Task.connect_configuration`](../references/sdk/task.md#connect_configuration)).
 
 ![Custom configuration objects](../img/webapp_tracking_28.png)
-
-:::important
-In older versions of ClearML Server, the Task model configuration appeared in the **ARTIFACTS** tab, **MODEL CONFIGURATION** section. Task model configurations now appear in the **Configuration Objects** section, in the **CONFIGURATION** tab.
-:::
 
 
 ## Artifacts
@@ -313,6 +305,11 @@ Individual plots can be shown / hidden or filtered by title.
 
 ![Plots tab](../img/webapp_tracking_35.png)
 
+The last iteration of each plot is displayed. Viewing a plot in full 
+screen (<img src="/docs/latest/icons/ico-maximize.svg" alt="Maximize plot icon" className="icon size-sm space-sm" />) 
+provides navigation to plots from previous iterations.  
+
+![Plots maximize tab](../img/webapp_tracking_35a.png)
 
 #### Plot Controls
 

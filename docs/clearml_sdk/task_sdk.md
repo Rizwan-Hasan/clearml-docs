@@ -111,6 +111,30 @@ It's possible to always create a new task by passing `reuse_last_task_id=False`.
 
 See full `Task.init` reference [here](../references/sdk/task.md#taskinit).
 
+### Continuing Task Execution
+You can continue the execution of a previously run task using the `continue_last_task` parameter of the `Task.init` 
+method. This will retain all of its previous artifacts / models / logs.  
+
+The task will continue reporting its outputs based on the iteration in which it had left off. For example: a task’s last 
+train/loss scalar reported was for iteration 100, when continued, the next report will be as iteration 101.  
+
+:::note Reproducibility
+Continued tasks may not be reproducible. In order to guarantee task reproducibility, you must ensure that all steps are 
+done in the same order (e.g. maintaining learning rate profile, ensuring data is fed in same order).
+:::
+
+Pass one of the following in the `continue_last_task` parameter:
+* `False` (default) - Overwrite the execution of the previous Task (unless you pass `reuse_last_task_id=False`, see 
+  [Task Reuse](#task-reuse)). 
+* `True` - Continue the previously run Task. 
+* Task ID (string) - The ID of the task to be continued. 
+* Initial iteration offset  (Integer) - Specify the initial iteration offset. By default, the task will continue one 
+  iteration after the last reported one. Pass `0`, to disable the automatic last iteration offset. To also specify a 
+  task ID, use the `reuse_last_task_id` parameter .
+
+You can also continue a task previously executed in offline mode, using the `Task.import_offline_session` method. 
+See [Offline Mode](#offline-mode). 
+
 ### Empty Task Creation
 
 A task can also be created without the need to execute the code itself.
@@ -131,7 +155,7 @@ task = Task.create(
 
 See full `Task.create` reference [here](../references/sdk/task.md#taskcreate).
 
-### Tracking Task Progress
+## Tracking Task Progress
 Track a task’s progress by setting the task progress property using the [`Task.set_progress`](../references/sdk/task.md#set_progress) method. 
 Set a task’s progress to a numeric value between 0 - 100. Access the task’s current progress, using the 
 [`Task.get_progress`](../references/sdk/task.md#get_progress) method. 
@@ -334,6 +358,18 @@ Upload the execution data that the Task captured offline to the ClearML Server u
 
   In the `session_folder_zip` argument, insert the path to the zip folder containing the session.
 
+  You can also use the offline task to update the execution of an existing previously executed task by providing the 
+  previously executed task’s ID. To avoid overwriting metrics, you can specify the initial iteration offset with 
+  `iteratiion_offset`.   
+  
+  ```python
+  Task.import_offline_session(
+    session_folder_zip="path/to/session/.clearml/cache/offline/b786845decb14eecadf2be24affc7418.zip", 
+    previous_task_id="12345679", 
+    iteration_offset=1500
+  )
+  ```
+
 Both options will upload the Task's full execution details and outputs and return a link to the Task's results page on 
 the ClearML Server.
 
@@ -487,7 +523,7 @@ To define parameters manually use the [`Task.set_parameters`](../references/sdk/
 name-value pairs in a parameter dictionary.
 
 Parameters can be designated into sections: specify a parameter’s section by prefixing its name, delimited with a slash 
-(i.e. `section_name/parameter_name’:value`). `General` is the default section.
+(i.e. `section_name/parameter_name:value`). `General` is the default section.
 
 Call the [`set_parameter`](../references/sdk/task.md#set_parameter) method to set a single parameter. 
 
@@ -530,7 +566,15 @@ print(task.get_parameters())
 ```
 
 Access a specific parameter with the [`Task.get_parameter`](../references/sdk/task.md#get_parameter) method specifying 
-the parameter name.
+the parameter name and section.
+
+```python
+param = task.get_parameter(name="Args/batch_size")
+```
+
+:::note Case sensitivity
+The parameters and their section names are case-sensitive 
+:::
 
 ### Tracking Python Objects
 

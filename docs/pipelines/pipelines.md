@@ -34,7 +34,8 @@ example of a pipeline with concurrent steps.
 ## Running Your Pipelines
 ClearML supports multiple modes for pipeline execution:
 * **Remote Mode** (default) - In this mode, the pipeline controller logic is executed through a designated queue, and all 
-  the pipeline steps are launched remotely through their respective queues.
+  the pipeline steps are launched remotely through their respective queues. Since each task is executed independently, 
+  it can have control over its git repository (if needed), required python packages and specific container to be used.
 * **Local Mode** - In this mode, the pipeline is executed locally, and the steps are executed as sub-processes. Each 
   subprocess uses the exact same Python environment as the main pipeline logic.
 * **Debugging Mode** (for PipelineDecorator) - In this mode, the entire pipeline is executed locally, with the pipeline 
@@ -83,6 +84,11 @@ Each pipeline must be assigned a version number to help track the evolution of y
 If you pass `auto_version_bump=True` when instantiating a PipelineController, the pipeline’s version automatically bumps up
 if there is a change in the pipeline code. If there is no change, the pipeline retains its version number.  
 
+### Tracking Pipeline Progress
+ClearML automatically tracks a pipeline’s progress percentage: the number of pipeline steps completed out of the total
+number of steps. For example, if a pipeline consists of 4 steps, after the first step completes, ClearML automatically 
+sets its progress value to 25. Once a pipeline has started to run but is yet to successfully finish, , the WebApp will 
+show the pipeline’s progress indication in the pipeline runs table, next to the run’s status.
 
 ## Examples
 

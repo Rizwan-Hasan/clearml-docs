@@ -22,7 +22,7 @@ The models table contains the following columns:
 | **RUN** | Pipeline run identifier  |  String |
 | **VERSION** | The pipeline version number. Corresponds to the [PipelineController](../../references/sdk/automation_controller_pipelinecontroller.md#class-pipelinecontroller) ’s and [PipelineDecorator](../../references/sdk/automation_controller_pipelinecontroller.md#class-automationcontrollerpipelinedecorator)’s `version` parameter | Version string |
 | **TAGS** | Descriptive, user-defined, color-coded tags assigned to run. | Tag |
-| **STATUS** | Pipeline run's status. See a list of the [task states and state transitions](../../fundamentals/task.md#task-states). |  String |
+| **STATUS** | Pipeline run's status. See a list of the [task states and state transitions](../../fundamentals/task.md#task-states). For Running, Failed, and Aborted runs, you will also see a progress indicator next to the status. See [here](../../pipelines/pipelines.md#tracking-pipeline-progress). |  String |
 | **USER** | User who created the run.  |  String |
 | **STARTED** | Elapsed time since the run started. To view the date and time of start, hover over the elapsed time.  |  Date-time |
 | **UPDATED** | Elapsed time since the last update to the run. To view the date and time of update, hover over the elapsed time. |  Date-time |
@@ -106,6 +106,7 @@ Access these actions with the context menu in any of the following ways:
 | Add Tag | User-defined labels added to runs for grouping and organization. | Any state |  None  |
 | Archive | To more easily work with active runs, archive a run. See [Archiving](../webapp_archiving.md). | Any state |  None  |
 | Restore | Action available in the archive. Restore a run to the active pipeline runs table. | Any state | None |
+| Delete | Action available in the archive. Delete a run and its steps, which will also remove all their logs, results, artifacts and debug samples | Any State | N/A |
 
 <div class="max-w-50">
 
