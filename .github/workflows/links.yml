@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           # Fail action on broken links
-          # fail: true
+          fail: true
           # Use json as output format (instead of markdown)
           # format: json
           args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
@@ -48,8 +48,8 @@ jobs:
         id: find_files
         run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
 
-      - name: Preparing for the excluded link checking
-        id: preparing_for_excluded_link_checking
+      - name: Renaming .lycheeignore
+        id: renaming_lycheeignore
         # if: ${{ false }}  # disable for now
         run: mv -v .lycheeignore lychee_include_file
 
@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           # Fail action on broken links
-          # fail: true
+          fail: true
           # Use json as output format (instead of markdown)
           # format: json
           args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat lychee_include_file | tr '\n' ' ')
