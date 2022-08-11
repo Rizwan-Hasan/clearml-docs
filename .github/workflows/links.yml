@@ -39,6 +39,11 @@ jobs:
           # format: json
           args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
 
+      - name: Renaming .lycheeignore file
+        id: rename_lycheeignore
+        # if: ${{ false }}  # disable for now
+        run: mv -v .lycheeignore .lycheeinclude
+
       - name: Link Checker DEV
         id: lychee-dev
         # if: ${{ false }}  # disable for now
@@ -50,7 +55,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat .lycheeinclude | tr '\n' ' ')
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
