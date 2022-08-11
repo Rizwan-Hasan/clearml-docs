@@ -28,7 +28,7 @@ jobs:
 
       - name: Link Checker
         id: lychee
-        if: ${{ false }}  # disable for now
+        # if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -41,7 +41,7 @@ jobs:
 
       - name: Link Checker DEV
         id: lychee-dev
-        # if: ${{ false }}  # disable for now
+        if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
