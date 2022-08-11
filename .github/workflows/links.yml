@@ -39,10 +39,12 @@ jobs:
           # format: json
           args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
 
-      - name: Renaming .lycheeignore file
-        id: rename_lycheeignore
+      - name: Preparing for the excluded link checking
+        id: preparing_for_excluded_link_checking
         # if: ${{ false }}  # disable for now
-        run: mv -v .lycheeignore lychee_include_file
+        run: |
+          mv -v .lycheeignore lychee_include_file
+          rm -v lychee*.tar.gz
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
