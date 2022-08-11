@@ -7,8 +7,12 @@ This page covers `clearml-data`, ClearML's file-based data management solution.
 See [Hyper-Datasets](../hyperdatasets/overview.md) for ClearML's advanced queryable dataset management solution.
 :::
 
-Datasets can be created, modified, and managed with ClearML Data's python interface. The following page provides an overview
-for using the most basic methods of the `Dataset` class. See the [Dataset reference page](../references/sdk/dataset.md) 
+Datasets can be created, modified, and managed with ClearML Data's python interface. You can upload your dataset to any 
+storage service of your choice  (S3 / GS / Azure / Network Storage) by setting the dataset’s upload destination (see 
+[`output_url`](#uploading-files) parameter of `Dataset.upload` method). Once you have uploaded your dataset, you can access 
+it from any machine.  
+
+The following page provides an overview for using the most basic methods of the `Dataset` class. See the [Dataset reference page](../references/sdk/dataset.md) 
 for a complete list of available methods.
 
 Import the `Dataset` class, and let's get started!
@@ -38,7 +42,8 @@ dataset = Dataset.create(
   dataset_project='dataset project', 
   parent_datasets=[PARENT_DS_ID_1, PARENT_DS_ID_2],
   dataset_version="1.0",
-  output_uri="gs://bucket-name/folder"	
+  output_uri="gs://bucket-name/folder",
+  description='my dataset description'
 )
 ```
 
@@ -138,7 +143,7 @@ If a file is already in a dataset, but it has been modified, it can be added aga
 upload the file diff.
 
 ```python
-dataset = Dataset.create()
+dataset = Dataset.create(dataset_name="my dataset", dataset_project="example project")
 dataset.add_files(path="path/to/folder_or_file")
 ```
 
@@ -162,7 +167,7 @@ method. Input the `source_url` argument, which can be a link from cloud storage 
 or local / network storage (`file://`). 
 
 ```python
-dataset = Dataset.create()
+dataset = Dataset.create(dataset_name="my dataset", dataset_project="example project")
 dataset.add_external_files(
   source_url="s3://my/bucket/path_to_folder_or_file", 
   dataset_path="/my_dataset/new_folder/"
