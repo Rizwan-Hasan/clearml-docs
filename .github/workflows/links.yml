@@ -39,12 +39,19 @@ jobs:
           # format: json
           args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
 
+  linkCheckerExcluded:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Find all markdown files
+        id: find_files
+        run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
+
       - name: Preparing for the excluded link checking
         id: preparing_for_excluded_link_checking
         # if: ${{ false }}  # disable for now
-        run: |
-          mv -v .lycheeignore lychee_include_file
-          rm -v lychee*.tar.gz
+        run: mv -v .lycheeignore lychee_include_file
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
