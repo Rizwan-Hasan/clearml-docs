@@ -48,10 +48,12 @@ jobs:
         id: find_files
         run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
 
-      - name: Renaming .lycheeignore
-        id: renaming_lycheeignore
+      - name: Preparing includes links
+        id: preparing_included_links
         # if: ${{ false }}  # disable for now
-        run: mv -v .lycheeignore lychee_include_file
+        run: |
+          echo "INCLUDED_LINKS=$(cat .lycheeignore | tr '\n' ' ')" >> $GITHUB_ENV
+          rm -vf .lycheeignore
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
@@ -64,7 +66,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat lychee_include_file | tr '\n' ' ')
+          args: ${{ env.MD_FILES }} --include ${{ env.INCLUDED_LINKS }} --max-concurrency 1 --no-progress --verbose
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
