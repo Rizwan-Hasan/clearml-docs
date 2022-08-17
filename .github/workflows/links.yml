@@ -31,7 +31,7 @@ jobs:
 
       - name: Find all markdown files
         id: find_md_files
-        run: echo "$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> "$MD_FILES_ENV_FILE"
+        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" >> "$MD_FILES_ENV_FILE"
 
       - uses: actions/upload-artifact@v3
         with:
@@ -53,7 +53,7 @@ jobs:
           path: ${{ env.ARTIFACTS_DIR }}
 
       - name: Putting content of artifacts-markdown-files-env-file into github env
-        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE})" >> $GITHUB_ENV
+        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Link Checker
         id: lychee
@@ -82,8 +82,8 @@ jobs:
           name: artifacts-markdown-files-env-file
           path: ${{ env.ARTIFACTS_DIR }}
 
-      - name: Display structure of downloaded files
-        run: cat "$MD_FILES_ENV_FILE"
+      - name: Putting content of artifacts-markdown-files-env-file into github env
+        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
