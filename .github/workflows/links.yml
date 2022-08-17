@@ -34,4 +34,4 @@ jobs:
 
       - name: Renaming .lycheeignore
         id: renaming_lycheeignore
-        run: echo $MD_FILES
+        run: echo '${{ env.MD_FILES }}'
