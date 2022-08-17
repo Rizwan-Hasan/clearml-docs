@@ -86,10 +86,10 @@ jobs:
         run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Creating lychee include file
-        run: mv -v .lycheeignore /tmp/lychee_include_file
+        run: cp -vf .lycheeignore /tmp/lychee_include_file
 
       - name: Removing .lycheeignore
-        run: rm -v .lycheeignore
+        run: rm -vf .lycheeignore
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
