@@ -102,7 +102,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat $LYCHEE_INCLUDE_FILE)
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include "$(cat ${LYCHEE_INCLUDE_FILE})"
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
