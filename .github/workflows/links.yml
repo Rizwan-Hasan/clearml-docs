@@ -66,11 +66,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: |
-            ${{ env.MD_FILES }} \
-            --max-concurrency 1 \
-            --no-progress \
-            --verbose
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
 
   LinkCheckerExcluded:
     runs-on: ubuntu-latest
@@ -96,7 +92,7 @@ jobs:
         run: rm -v .lycheeignore
 
       - name: Link Checker (Excluded ones only)
-        id: lychee-excluded
+        id: lychee-dev
         # if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
@@ -106,12 +102,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: |
-            ${{ env.MD_FILES }} \
-            --max-concurrency 1 \
-            --no-progress \
-            --verbose \
-            --include $(cat $LYCHEE_INCLUDE_FILE)
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat ${LYCHEE_INCLUDE_FILE})
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
