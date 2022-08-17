@@ -28,7 +28,6 @@ jobs:
 
   linkCheckerExcluded:
     runs-on: ubuntu-latest
-    needs: [linkChecker]
     steps:
       - uses: actions/checkout@v3
 
