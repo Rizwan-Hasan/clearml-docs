@@ -52,7 +52,7 @@ jobs:
           path: ${{ env.MD_FILES_ENV_FILE }}
 
       - name: Display structure of downloaded files
-        run: cat "$MD_FILES_ENV_FILE"
+        run: ls -R "$MD_FILES_ENV_FILE"
 
       - name: Link Checker
         id: lychee
@@ -81,7 +81,7 @@ jobs:
           path: ${{ env.MD_FILES_ENV_FILE }}
 
       - name: Display structure of downloaded files
-        run: cat "$MD_FILES_ENV_FILE"
+        run: ls -R "$MD_FILES_ENV_FILE"
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
