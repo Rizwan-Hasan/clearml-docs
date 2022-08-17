@@ -26,11 +26,58 @@ jobs:
         id: find_files
         run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
 
+      - name: Link Checker
+        id: lychee
+        # if: ${{ false }}  # disable for now
+        uses: lycheeverse/lychee-action@v1.5.1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          # Fail action on broken links
+          fail: true
+          # Use json as output format (instead of markdown)
+          # format: json
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
+
   linkCheckerExcluded:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
+      - name: Find all markdown files
+        id: find_files
+        run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
+
       - name: Renaming .lycheeignore
         id: renaming_lycheeignore
-        run: echo '${{ env.MD_FILES }}'
+        # if: ${{ false }}  # disable for now
+        run: mv -v .lycheeignore lychee_include_file
+
+      - name: Link Checker (Excluded ones only)
+        id: lychee-dev
+        # if: ${{ false }}  # disable for now
+        uses: lycheeverse/lychee-action@v1.5.1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          # Fail action on broken links
+          fail: true
+          # Use json as output format (instead of markdown)
+          # format: json
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat lychee_include_file | tr '\n' ' ')
+
+      #- name: Read Results
+      #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
+      #  run: echo "FAILED_URLS=$(jq -r '.fail_map[] | .[] | .url' ./lychee/out.md)" >> $GITHUB_ENV
+
+      #- name: Slack Notification
+      #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
+      #  uses: tokorom/action-slack-incoming-webhook@main
+      #  env:
+      #    INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      #  with:
+      #    blocks: |
+      #      [
+      #        {"type": "section", "text": {"type": "mrkdwn", "text": ":warning: Link Checker failure in github.com/allegroai/clearml-docs "}},
+      #        {"type": "section", "text": {"type": "mrkdwn", "text": "$FAILED_URLS"}}
+      #      ]
