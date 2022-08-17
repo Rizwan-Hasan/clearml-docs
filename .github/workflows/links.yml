@@ -24,7 +24,9 @@ jobs:
 
       - name: Find all markdown files
         id: find_files
-        run: echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
+        run: |
+          echo "MD_FILES=$(find . -name '*.md' -type f | sed 's|^./||' | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "$MD_FILES"
 
   linkCheckerExcluded:
     runs-on: ubuntu-latest
@@ -34,4 +36,4 @@ jobs:
 
       - name: Renaming .lycheeignore
         id: renaming_lycheeignore
-        run: echo $MD_FILES
+        run: echo "$MD_FILES"
