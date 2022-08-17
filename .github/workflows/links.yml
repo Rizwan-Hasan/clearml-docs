@@ -85,6 +85,12 @@ jobs:
       - name: Putting content of artifacts-markdown-files-env-file into github env
         run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
 
+      - name: Creating lychee include file
+        run: echo "LYCHEE_INCLUDE_FILE=$(cat .lycheeignore | tr '\n' ' ')" >> $GITHUB_ENV
+
+      - name: Removing .lycheeignore
+        run: rm -v .lycheeignore
+
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
         # if: ${{ false }}  # disable for now
@@ -96,7 +102,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat lychee_include_file | tr '\n' ' ')
+          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose --include $(cat ${LYCHEE_INCLUDE_FILE})
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
