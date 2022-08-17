@@ -52,12 +52,12 @@ jobs:
           name: artifacts-markdown-files-env-file
           path: ${{ env.ARTIFACTS_DIR }}
 
-      - name: Display structure of downloaded files
-        run: cat "$MD_FILES_ENV_FILE"
+      - name: Putting content of artifacts-markdown-files-env-file into github env
+        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE})" >> $GITHUB_ENV
 
       - name: Link Checker
         id: lychee
-        if: ${{ false }}  # disable for now
+        # if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
