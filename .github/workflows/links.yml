@@ -30,7 +30,7 @@ jobs:
 
       - name: Find all markdown files
         id: find_md_files
-        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" >> "${MD_ARTIFACTS_DIR}/MD_FILES.txt"
+        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" > "${MD_ARTIFACTS_DIR}/MD_FILES.txt"
 
       - uses: actions/upload-artifact@v3
         with:
@@ -51,11 +51,13 @@ jobs:
           path: ${{ env.MD_ARTIFACTS_DIR }}
 
       - name: Creating MD_FILES env variable
-        run: echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+        run: |
+          find . "${MD_ARTIFACTS_DIR}"
+          echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Link Checker
         id: lychee
-        # if: ${{ false }}  # disable for now
+        if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -90,7 +92,7 @@ jobs:
 
       - name: Link Checker (Excluded ones only)
         id: lychee-dev
-        # if: ${{ false }}  # disable for now
+        if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
