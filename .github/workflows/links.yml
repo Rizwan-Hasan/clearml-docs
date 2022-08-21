@@ -79,58 +79,6 @@ jobs:
           # format: json
           args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose
 
-      - name: Link Checker (Batch 2)
-        id: lychee_batch_2
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_2 }} --max-concurrency 1 --no-progress --verbose
-
-      - name: Link Checker (Batch 3)
-        id: lychee_batch_3
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_3 }} --max-concurrency 1 --no-progress --verbose
-
-      - name: Link Checker (Batch 4)
-        id: lychee_batch_4
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_4 }} --max-concurrency 1 --no-progress --verbose
-
-      - name: Link Checker (Batch 5)
-        id: lychee_batch_5
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_5 }} --max-concurrency 1 --no-progress --verbose
-
   LinkCheckerExcluded:
     runs-on: ubuntu-latest
     needs: [FindingAllFiles]
@@ -171,58 +119,6 @@ jobs:
           # Use json as output format (instead of markdown)
           # format: json
           args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
-
-      - name: Link Checker (Batch 2)
-        id: lychee_batch_2
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_2 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
-
-      - name: Link Checker (Batch 3)
-        id: lychee_batch_3
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_3 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
-
-      - name: Link Checker (Batch 4)
-        id: lychee_batch_4
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_4 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
-
-      - name: Link Checker (Batch 5)
-        id: lychee_batch_5
-        # if: ${{ false }}  # disable for now
-        uses: lycheeverse/lychee-action@v1.5.1
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          # Fail action on broken links
-          # fail: true
-          # Use json as output format (instead of markdown)
-          # format: json
-          args: ${{ env.MD_FILES_BATCH_5 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
 
       #- name: Read Results
       #  if: ${{ steps.lychee.outputs.exit_code != 0 }}
