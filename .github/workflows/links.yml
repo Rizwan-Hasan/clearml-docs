@@ -44,7 +44,7 @@ jobs:
           name: artifacts-markdown
           path: ${{ env.MD_ARTIFACTS_DIR }}
 
-  LinkChecker:
+  Link_Checker_Batch1:
     runs-on: ubuntu-latest
     needs: [FindingAllFiles]
     env:
@@ -79,7 +79,7 @@ jobs:
           # format: json
           args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose
 
-  LinkCheckerExcluded:
+  Link_Checker_Excluded_Batch1:
     runs-on: ubuntu-latest
     needs: [FindingAllFiles]
     env:
