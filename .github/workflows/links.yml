@@ -47,7 +47,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          nams: artifacts-markdown
+          name: artifacts-markdown
           path: ${{ env.MD_ARTIFACTS_DIR }}
 
       - name: Creating MD_FILES env variable
