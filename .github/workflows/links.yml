@@ -30,7 +30,14 @@ jobs:
 
       - name: Find all markdown files
         id: find_md_files
-        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" >> "${MD_ARTIFACTS_DIR}/MD_FILES.txt"
+        run: |
+          export md_files_arr=($(find . -name '*.md' -type f | sed 's|^./||'))
+          echo "${md_files_arr}" > "${MD_ARTIFACTS_DIR}/MD_FILES.txt"
+          echo "${md_files_arr[@]:0:50}" | tr ' ' '\n' > "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_1.txt"
+          echo "${md_files_arr[@]:50:50}" | tr ' ' '\n' > "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_2.txt"
+          echo "${md_files_arr[@]:100:50}" | tr ' ' '\n' > "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_3.txt"
+          echo "${md_files_arr[@]:150:50}" | tr ' ' '\n' > "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_4.txt"
+          echo "${md_files_arr[@]:200}" | tr ' ' '\n' > "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_5.txt"
 
       - uses: actions/upload-artifact@v3
         with:
@@ -50,11 +57,17 @@ jobs:
           name: artifacts-markdown
           path: ${{ env.MD_ARTIFACTS_DIR }}
 
-      - name: Creating MD_FILES env variable
-        run: echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+      - name: Creating all MD_FILES env variable
+        run: |
+          echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "MD_FILES_BATCH_1=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_1.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "MD_FILES_BATCH_2=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_2.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "MD_FILES_BATCH_3=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_3.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "MD_FILES_BATCH_4=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_4.txt" | tr '\n' ' ')" >> $GITHUB_ENV
+          echo "MD_FILES_BATCH_5=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES_BATCH_5.txt" | tr '\n' ' ')" >> $GITHUB_ENV
 
-      - name: Link Checker
-        id: lychee
+      - name: Link Checker (Batch 1)
+        id: lychee_batch_1
         # if: ${{ false }}  # disable for now
         uses: lycheeverse/lychee-action@v1.5.1
         env:
@@ -64,7 +77,7 @@ jobs:
           fail: true
           # Use json as output format (instead of markdown)
           # format: json
-          args: ${{ env.MD_FILES }} --max-concurrency 1 --no-progress --verbose
+          args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose
 
   LinkCheckerExcluded:
     runs-on: ubuntu-latest
