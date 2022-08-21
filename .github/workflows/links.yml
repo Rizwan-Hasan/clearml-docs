@@ -74,7 +74,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           # Fail action on broken links
-          # fail: true
+          fail: true
           # Use json as output format (instead of markdown)
           # format: json
           args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose
@@ -115,7 +115,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           # Fail action on broken links
-          # fail: true
+          fail: true
           # Use json as output format (instead of markdown)
           # format: json
           args: ${{ env.MD_FILES_BATCH_1 }} --max-concurrency 1 --no-progress --verbose --include $(cat /tmp/lychee_include_file | tr '\n' ' ')
