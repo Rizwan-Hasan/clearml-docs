@@ -20,8 +20,7 @@ jobs:
   FindingAllFiles:
     runs-on: ubuntu-latest
     env:
-      ARTIFACTS_DIR: /tmp/tmp_artifacts_directory/
-      MD_FILES_ENV_FILE: /tmp/tmp_artifacts_directory/MD_FILES.env
+      MD_ARTIFACTS_DIR: /tmp/md_artifacts
     steps:
       - uses: actions/checkout@v3
 
@@ -31,29 +30,27 @@ jobs:
 
       - name: Find all markdown files
         id: find_md_files
-        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" >> "$MD_FILES_ENV_FILE"
+        run: echo "$(find . -name '*.md' -type f | sed 's|^./||')" >> "${MD_ARTIFACTS_DIR}/MD_FILES.txt"
 
       - uses: actions/upload-artifact@v3
         with:
-          name: artifacts-markdown-files-env-file
-          path: ${{ env.MD_FILES_ENV_FILE }}
+          name: artifacts-markdown
+          path: ${{ env.MD_ARTIFACTS_DIR }}
 
   LinkChecker:
     runs-on: ubuntu-latest
     needs: [FindingAllFiles]
     env:
-      ARTIFACTS_DIR: /tmp/tmp_artifacts_directory/
-      MD_FILES_ENV_FILE: /tmp/tmp_artifacts_directory/MD_FILES.env
+      MD_ARTIFACTS_DIR: /tmp/md_artifacts
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/download-artifact@v3
         with:
-          name: artifacts-markdown-files-env-file
-          path: ${{ env.ARTIFACTS_DIR }}
+          path: ${{ env.MD_ARTIFACTS_DIR }}
 
-      - name: Putting content of artifacts-markdown-files-env-file into github env
-        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
+      - name: Creating MD_FILES env variable
+        run: echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Link Checker
         id: lychee
@@ -72,18 +69,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [FindingAllFiles]
     env:
-      ARTIFACTS_DIR: /tmp/tmp_artifacts_directory/
-      MD_FILES_ENV_FILE: /tmp/tmp_artifacts_directory/MD_FILES.env
+      MD_ARTIFACTS_DIR: /tmp/md_artifacts
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/download-artifact@v3
         with:
-          name: artifacts-markdown-files-env-file
-          path: ${{ env.ARTIFACTS_DIR }}
+          path: ${{ env.MD_ARTIFACTS_DIR }}
 
-      - name: Putting content of artifacts-markdown-files-env-file into github env
-        run: echo "MD_FILES=$(cat ${MD_FILES_ENV_FILE} | tr '\n' ' ')" >> $GITHUB_ENV
+      - name: Creating MD_FILES env variable
+        run: echo "MD_FILES=$(cat "${MD_ARTIFACTS_DIR}/MD_FILES.txt" | tr '\n' ' ')" >> $GITHUB_ENV
 
       - name: Creating lychee include file
         run: cp -vf .lycheeignore /tmp/lychee_include_file
