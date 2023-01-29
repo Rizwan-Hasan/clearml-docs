@@ -10,7 +10,7 @@ This release is not backwards compatible
 
 **Breaking Changes**
 * `preprocess` and `postprocess` class functions get 3 arguments
-* Add support for per-request state storage, passing information between the pre/post processing functions
+* Add support for per-request state storage, passing information between the pre/post-processing functions
 
 **Features & Bug Fixes**
 
@@ -71,7 +71,7 @@ This release is not backwards compatible
 
 - Fix `default_output_uri` for Dataset creation [ClearML GitHub issue 371](https://github.com/allegroai/clearml/issues/371)
 - Fix `clearml-task` failing without a docker script [ClearML GitHub issue 378](https://github.com/allegroai/clearml/issues/378)
-- Fix Pytorch DDP sub-process spawn multi-process
+- Fix PyTorch DDP sub-process spawn multi-process
 - Fix `Task.execute_remotely()` on created Task (not initialized Task)
 - Fix auto scaler custom bash script should be called last before starting agent
 - Fix auto scaler spins too many instances at once then kills the idle ones (spin time is longer than poll time)
