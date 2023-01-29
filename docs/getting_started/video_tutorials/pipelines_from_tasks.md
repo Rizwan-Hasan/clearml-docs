@@ -17,9 +17,7 @@ keywords: [mlops, components, automation, orchestration, pipeline]
 </iframe>
 </div>
 
-<details className="cml-expansion-panel info">
-<summary className="cml-expansion-panel-summary">Read the transcript</summary>
-<div className="cml-expansion-panel-content">
+### Video Transcript 
 
 Hello and welcome to ClearML. In this video we’ll take a look at how pipelines can be created from tasks instead of from code like we saw in the last video.
 
@@ -47,7 +45,7 @@ The structure of your pipeline will be derived from looking at this `parents` ar
 
 Now we do the same for the final step. However, remember the empty hyperparameters we saw before? We still have to overwrite these. We can use the `parameter_override` argument to do just that.
 
-For example, we can tell the first step to use the global pipeline parameter raw data url like so. But we can also reference output artifacts from a previous step by using its name and we can of course also just overwrite a parameter with a normal value. Finally, we can even pass along the unique task ID of a previous step, so you can get the task object based on that ID and access anything and everything within that task.
+For example, we can tell the first step to use the global pipeline parameter raw data url like so. But we can also reference output artifacts from a previous step by using its name, and we can of course also just overwrite a parameter with a normal value. Finally, we can even pass along the unique task ID of a previous step, so you can get the task object based on that ID and access anything and everything within that task.
 
 And that’s it! We now have our first pipeline!
 
@@ -59,8 +57,6 @@ Now we can do all the same things that we could with a pipeline built from code.
 
 When we select a specific step, we can see its inputs and outputs as well as its logs down here and even the original code.
 
-Finally, we can also clone the whole pipeline and change its parameters by clicking on the new run button. This is the most powerful feature of all, as it allows us to really quickly rerun the whole pipeline with different parameters from the UI. The agents will take care of the rest!
+Finally, we can also clone the whole pipeline and change its parameters by clicking on the **+ New Run** button. This is the most powerful feature of all, as it allows us to really quickly rerun the whole pipeline with different parameters from the UI. The agents will take care of the rest!
 
-In the next video of this Getting Started series, we’ll take a look at ClearML Data, for real this time. In the meantime, spin up some pipeline controllers yourself for free at app.clear.ml and don’t forget to join our Slack channel, if you need any help.
-</div>
-</details>
+In the next video of this Getting Started series, we’ll take a look at ClearML Data, for real this time. In the meantime, spin up some pipeline controllers yourself for free at [app.clear.ml](https://app.clear.ml) and don’t forget to join our [Slack Channel](https://join.slack.com/t/clearml/shared_invite/zt-1kvcxu5hf-SRH_rmmHdLL7l2WadRJTQg), if you need any help.

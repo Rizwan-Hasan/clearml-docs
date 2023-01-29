@@ -13,9 +13,9 @@ interface.
 
 Once integrated into code, ClearML automatically logs and tracks models and any snapshots created by the following 
 frameworks:
-- Tensorflow (see [code example](../guides/frameworks/tensorflow/tensorflow_mnist.md))
+- TensorFlow (see [code example](../guides/frameworks/tensorflow/tensorflow_mnist.md))
 - Keras (see [code example](../guides/frameworks/keras/keras_tensorboard.md))
-- Pytorch (see [code example](../guides/frameworks/pytorch/pytorch_mnist.md))
+- PyTorch (see [code example](../guides/frameworks/pytorch/pytorch_mnist.md))
 - scikit-learn (only using joblib) (see [code example](../guides/frameworks/scikit-learn/sklearn_joblib_example.md))
 - XGBoost (only using joblib) (see [code example](../guides/frameworks/xgboost/xgboost_sample.md))
 - FastAI (see [code example](../guides/frameworks/fastai/fastai_with_tensorboard.md))
@@ -72,6 +72,6 @@ the models associated with a project are listed.
 ## SDK Interface
 
 See [the Models SDK interface](../clearml_sdk/model_sdk.md) for an overview for using the most basic Pythonic methods of the model 
-classes. See a detailed list of all available methods  in the [Model](../references/sdk/model_model.md), [OutputModel](../references/sdk/model_outputmodel.md), and [InputModel](../references/sdk/model_inputmodel.md) 
+classes. See a detailed list of all available methods in the [Model](../references/sdk/model_model.md), [OutputModel](../references/sdk/model_outputmodel.md), and [InputModel](../references/sdk/model_inputmodel.md) 
 reference pages. 
 
