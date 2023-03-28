@@ -1,5 +1,5 @@
 ---
-title: ClearML Agent Overview
+title: ClearML Agent
 ---
 
 **ClearML Agent** is a virtual environment and execution manager for DL / ML solutions on GPU machines. It integrates with the **ClearML Python Package** and ClearML Server to provide a full AI cluster solution. <br/>
@@ -27,11 +27,18 @@ The diagram above demonstrates a typical flow where an agent executes a task:
 
 While the agent is running, it continuously reports system metrics to the ClearML Server (These can be monitored in the **Workers and Queues** page).  
 
-Continue using **ClearML Agent** once it is running on a target machine. Reproduce experiments and execute 
+Continue using ClearML Agent once it is running on a target machine. Reproduce experiments and execute 
 automated workflows in one (or both) of the following ways: 
-* Programmatically
-* By using the **ClearML Web UI** (without directly working with code), by enqueuing experiments 
-to the queue that a **ClearML Agent** is listening to.
+* Programmatically (using [`Task.enqueue`](references/sdk/task.md#taskenqueue) or [`Task.execute_remotely`](references/sdk/task.md#execute_remotely))
+* Through the ClearML Web UI (without working directly with code), by cloning experiments and enqueuing them to the 
+  queue that a ClearML Agent is servicing.
+
+The agent facilitates [overriding task execution detail](webapp/webapp_exp_tuning.md) values through the UI without 
+code modification. Modifying a task clone’s configuration will have the ClearML agent executing it override the 
+original values:
+* Modified package requirements will have the experiment script run with updated packages
+* Modified recorded command line arguments will have the ClearML agent inject the new values in their stead
+* Code-level configuration instrumented with [`Task.connect`](references/sdk/task.md#connect) will be overridden by modified hyperparameters
 
 For more information, see [ClearML Agent Reference](clearml_agent/clearml_agent_ref.md), 
 and [configuration options](configs/clearml_conf.md#agent-section).
@@ -52,6 +59,8 @@ pip install clearml-agent
 
 :::info
 Install ClearML Agent as a system Python package and not in a Python virtual environment.
+An agent that runs in Virtual Environment Mode or Conda Environment Mode needs to create virtual environments, and
+it can't do that when running from a virtual environment.
 :::
 
 ## Configuration
@@ -473,7 +482,7 @@ To limit the number of simultaneous tasks run in services mode, pass the maximum
 
 Launch a service task like any other task, by enqueuing it to the appropriate queue.
 
-:::warning
+:::caution
 Do not enqueue training or inference tasks into the services queue. They will put an unnecessary load on the server.
 :::
 
@@ -560,7 +569,7 @@ Override worker schedules by:
 
 Set a schedule for a worker from the command line when running `clearml-agent`. Two properties enable setting working hours:
 
-:::warning
+:::caution
 Use only one of these properties
 :::
 
@@ -589,7 +598,7 @@ For example:
 
 Set a schedule for a worker using configuration file options. The options are:
 
-:::warning
+:::caution
 Use only one of these properties
 :::
 
@@ -606,7 +615,7 @@ For example, set a worker's schedule from 5 PM to 8 PM on Sunday through Tuesday
 
 Runtime properties override the command line uptime / downtime properties. The runtime properties are:
 
-:::warning
+:::caution
 Use only one of these properties
 :::
 
@@ -628,7 +637,7 @@ For example, to force a worker on for 24 hours:
 
 Queue tags override command line and runtime properties. The queue tags are the following:
 
-:::warning
+:::caution
 Use only one of these properties
 :::
 
@@ -649,3 +658,9 @@ Or, force workers on for a queue using the REST API:
 ```bash
 curl --user <key>:<secret> --header "Content-Type: application/json" --data '{"queue":"<queue_id>","tags":["force_workers:on"]}' http://<api-server-hostname-or-ip>:8008/queues.update
 ```
+
+## References
+
+* See [ClearML Agent CLI](clearml_agent/clearml_agent_ref.md) for a reference for `clearml-agent`'s CLI commands. 
+* See [ClearML Agent Environment Variables](clearml_agent/clearml_agent_env_var.md) for a list of environment variables
+to configure ClearML Agent

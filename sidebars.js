@@ -36,19 +36,7 @@ module.exports = {
         {'ClearML Fundamentals': ['fundamentals/projects', 'fundamentals/task', 'fundamentals/hyperparameters', 'fundamentals/artifacts', 'fundamentals/logger', 'fundamentals/agents_and_queues',
             'fundamentals/hpo']},
         {'ClearML SDK': ['clearml_sdk/clearml_sdk', 'clearml_sdk/task_sdk', 'clearml_sdk/model_sdk', 'clearml_sdk/apiclient_sdk']},
-        {'ClearML Agent':
-                [
-                    'clearml_agent',
-                    {'Reference':
-                            [
-                                'clearml_agent/clearml_agent_ref', 'clearml_agent/clearml_agent_build',
-                                'clearml_agent/clearml_agent_config', 'clearml_agent/clearml_agent_daemon',
-                                'clearml_agent/clearml_agent_execute', 'clearml_agent/clearml_agent_list',
-                                'clearml_agent/clearml_agent_env_var'
-                            ]
-                    }
-                ]
-        },
+        'clearml_agent',
         {'ClearML Pipelines':['pipelines/pipelines',
                 {"Building Pipelines":
                         ['pipelines/pipelines_sdk_tasks', 'pipelines/pipelines_sdk_function_decorators']
@@ -95,7 +83,8 @@ module.exports = {
                     'webapp/applications/apps_aws_autoscaler',
                     'webapp/applications/apps_gcp_autoscaler',
                     'webapp/applications/apps_hpo',
-                    'webapp/applications/apps_dashboard'
+                    'webapp/applications/apps_dashboard',
+                    'webapp/applications/apps_task_scheduler'
                 ]
 
             },
@@ -178,7 +167,7 @@ module.exports = {
 
     ],
     rnSidebar: {
-        'Release Notes': ['release_notes/ver_1_9', 'release_notes/ver_1_8', 'release_notes/ver_1_7',
+        'Release Notes': ['release_notes/ver_1_10', 'release_notes/ver_1_9', 'release_notes/ver_1_8', 'release_notes/ver_1_7',
             'release_notes/ver_1_6', 'release_notes/ver_1_5', 'release_notes/ver_1_4', 'release_notes/ver_1_3',
             'release_notes/ver_1_2','release_notes/ver_1_1', 'release_notes/ver_1_0', 'release_notes/ver_0_17',
             'release_notes/ver_0_16', 'release_notes/ver_0_15', 'release_notes/ver_0_14', 'release_notes/ver_0_13',
@@ -207,6 +196,9 @@ module.exports = {
                 'references/sdk/hpo_parameters_uniformparameterrange',
                 'references/sdk/hpo_parameters_parameterset',
                 ]},
+    ],
+    clearmlAgentSidebar: [
+        'clearml_agent/clearml_agent_ref', 'clearml_agent/clearml_agent_env_var'
     ],
     hyperdatasetsSidebar: [
         'hyperdatasets/overview',

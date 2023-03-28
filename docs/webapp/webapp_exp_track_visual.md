@@ -32,28 +32,22 @@ table / full screen**.
 The info panel keeps the experiment table in view so that [experiment actions](webapp_exp_table.md#experiment-actions)
 can be performed from the table (as well as the menu in the info panel).
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">View a screenshot</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="screenshot" title="View a screenshot">
 
 ![Info panel](../img/webapp_tracking_40.png)
 
-</div>
-</details>
+</Collapsible>
 
 ### Full Screen Details View
 
 The full screen details view allows for easier viewing and working with experiment tracking and results. The experiments
 table is not visible when the full screen details view is open. Perform experiment actions from the menu.
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">View a screenshot</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="screenshot" title="View a screenshot">
 
 ![Full screen view](../img/webapp_tracking_33.png)
 
-</div>
-</details>
+</Collapsible>
 
 
 ## Execution 
@@ -241,27 +235,29 @@ tools (e.g. Notion). See [Plot Controls](#plot-controls).
 The complete experiment log containing everything printed to stdout and stderr appears in the **CONSOLE** tab. The full log
 is downloadable. To view the end of the log, click **Jump to end**.
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">View a screenshot</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="screenshot" title="View a screenshot">
 
 ![Console tab](../img/webapp_tracking_32.png)
 
-</div>
-</details>
+</Collapsible>
 
 
 
 ### Scalars
 
 All scalars that ClearML automatically logs, as well as those explicitly reported in code, appear in
-**SCALARS**. Scalar values are presented as time series line chart. To see the series for a metric in high resolution, 
+**SCALARS**. 
+
+Scalar series are presented in a line chart. To see the series for a metric in high resolution, 
 view it in full screen mode by hovering over the graph and clicking <img src="/docs/latest/icons/ico-maximize.svg" alt="Maximize plot icon" className="icon size-sm space-sm" />.
 
 :::info Full Screen Refresh
 Scalar graphs in full screen mode do not auto-refresh. Click <img src="/docs/latest/icons/ico-reset.svg" alt="Refresh" className="icon lt size-md space-sm medium-zoom-image" /> 
 to update the graph. 
 :::
+
+Reported single value scalars are aggregated into a table plot displaying scalar names and values (see [`Logger.report_single_value`](../references/sdk/logger.md#report_single_value)). 
+
 
 #### Scalar Plot Tools
 
@@ -270,26 +266,19 @@ are on the left side of the window. The tools include:
 * **Group by** - Select one of the following:
   * **Metric** - All variants for a metric on the same plot
 
-    <details className="cml-expansion-panel screenshot">
-    <summary className="cml-expansion-panel-summary">View a screenshot</summary>
-    <div className="cml-expansion-panel-content">
+    <Collapsible type="screenshot" title="View a screenshot">
 
     ![Plots grouped by metric](../img/webapp_tracking_33.png)
 
-    </div>
-    </details>
-    <br/>
+    </Collapsible>
       
   * **None** - Group by metric and variant (individual metric-variant plots).
 
-    <details className="cml-expansion-panel screenshot">
-    <summary className="cml-expansion-panel-summary">View a screenshot</summary>
-    <div className="cml-expansion-panel-content">
+    <Collapsible type="screenshot" title="View a screenshot">
 
     ![Plots groups my metric and variant](../img/webapp_tracking_34.png)
 
-    </div>
-    </details>
+    </Collapsible>
 
 * Show / hide plots - Click **HIDE ALL**, and then click <img src="/docs/latest/icons/ico-show.svg" alt="Eye Show All" className="icon size-md space-sm" />
   on those you want to see.

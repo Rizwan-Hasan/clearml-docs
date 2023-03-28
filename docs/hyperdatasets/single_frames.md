@@ -14,6 +14,7 @@ A `SingleFrame` contains the following components:
 * [Masks](#masks)
 * [Previews](#previews)
 * [Metadata](#metadata)
+* [Context ID](#context-id)
 
 ### Sources
 Every `SingleFrame` includes a [`sources`](sources.md) dictionary, which contains attributes of the raw data, including:
@@ -52,13 +53,23 @@ For more information, see [Previews](previews.md).
 
 For more information, see [Custom Metadata](custom_metadata.md).
 
+### Context ID
+Frames' `context_id` property facilitates grouping SingleFrames and FrameGroups. When a `context_id` is not explicitly 
+defined, the frame's source URI is used instead.
+
+When you query the server for frames (e.g. with the [`DataView.get_iterator`](../references/hyperdataset/dataview.md#get_iterator) 
+method), the returned frames are grouped together according to their `context_id`, and within their context group are 
+ordered according to their `timestamp`. 
+
+Use the WebApp's dataset version frame browser "Group by URL" option to display a single preview for all frames with the 
+same context ID. Click the preview to view the context group's frames in the frame viewer in order of their timestamps. 
+This is useful when working with a video. You can give all the video frames the same context ID, and then view them in order.
+
 ## Frame Structure
 
 The panel below describes the details contained within a `frame`:
 
-<details className="cml-expansion-panel configuration">
-<summary className="cml-expansion-panel-summary">Frame Structure</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="configuration" title="Frame Structure">
 
 * `id` (*string*) - The unique ID of this frame. 
 * `blob` (*string*) - Raw data.
@@ -117,9 +128,7 @@ The panel below describes the details contained within a `frame`:
 * `saved` - The epoch time that the frame was saved.
 * `timestamp` - For images from video, a timestamp that indicates the absolute position of this frame from the source (video).
 
-</div>
-</details>
-<br/>
+</Collapsible>
 
 ## WebApp 
 
@@ -129,21 +138,16 @@ WebApp (UI).
 When viewing a frame on the WebApp, all the information associated with it can be viewed, including its frame labels and
 object annotations, its metadata, and other details.
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">SingleFrame in the WebApp frame viewer</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="screenshot" title="SingleFrame in the WebApp frame viewer">
 
 This image shows a SingleFrame in the ClearML Enterprise WebApp (UI) [frame viewer](webapp/webapp_datasets_frames.md#frame-viewer). 
     
 ![image](../img/hyperdatasets/frame_overview_01.png)
 
-</div>
-</details>
-<br/>
+</Collapsible>
 
-<details className="cml-expansion-panel configuration">
-<summary className="cml-expansion-panel-summary">SingleFrame details represented in the WebApp</summary>
-<div className="cml-expansion-panel-content">
+
+<Collapsible type="configuration" title="SingleFrame details represented in the WebApp">
 
     
     id : "287024"
@@ -184,9 +188,7 @@ This image shows a SingleFrame in the ClearML Enterprise WebApp (UI) [frame view
     saved_in_version : "6ad8b10c668e419f9dd40422f667592c"
     num_frames : 1
 
-</div>
-</details>
-<br/>
+</Collapsible>
 
 For more information about using Frames in the WebApp, see [Working with Frames](webapp/webapp_datasets_frames.md). 
 
@@ -218,7 +220,7 @@ There are also options to populate the instance with:
 * A dictionary of annotation objects - `annotations`
 * A URI link to a mask file for the frame - `mask_source`
 
-For more information, see the `SingleFrame` class description.
+For more information, see the [`SingleFrame`](../references/hyperdataset/singleframe.md) class description.
 
 ### Adding SingleFrames to a Dataset Version
 

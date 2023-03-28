@@ -17,26 +17,19 @@ machine that better meets resource needs. This feature provides local links to a
 remote machine over a secure and encrypted SSH connection. By default, the JupyterLab and 
 VS Code remote sessions use ports 8878 and 8898 respectively. 
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">JupyterLab Window</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible title="JupyterLab Window" type="screenshot">
 
 ![image](../img/session_jupyter.png)
 
-</div>
-</details>
+</Collapsible>
 
 <br/>
 
-<details className="cml-expansion-panel screenshot">
-<summary className="cml-expansion-panel-summary">VS Code Window</summary>
-<div className="cml-expansion-panel-content">
+<Collapsible type="screenshot" title="VS Code Window">
 
 ![image](../img/session_vs_code.png)
 
-</div>
-</details>
-<br/>
+</Collapsible>
 
 :::info Remote PyCharm
 You can also work with PyCharm in a remote session over SSH. Use the [PyCharm Plugin](../guides/ide/integration_pycharm.md) 
@@ -45,7 +38,7 @@ to automatically sync local configurations with a remote session.
 
 ## How it Works
 
-ClearML allows you to leverage a resource (e.g. GPU or CPU machine) by utilizing the [ClearML Agent](../clearml_agent.md).
+ClearML lets you leverage a resource (e.g. GPU or CPU machine) by utilizing the [ClearML Agent](../clearml_agent.md).
 A ClearML Agent runs on a target machine, and ClearML Session instructs it to execute the Jupyter / VS Code 
 server to develop remotely.
 After entering a `clearml-session` command with all specifications: 

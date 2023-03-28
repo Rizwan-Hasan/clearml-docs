@@ -17,13 +17,27 @@ model checkpoints, artifacts, and charts to cloud storage (see [Storage](../inte
 you can work with tasks in Offline Mode, in which all information is saved in a local folder (see 
 [Storing Task Data Offline](../guides/set_offline.md)).
 
-In the UI and code, tasks are grouped into [projects](projects.md), which are logical entities similar to folders. Users can decide
+Tasks are grouped into a [project](projects.md) hierarchical structure, similar to file folders. Users can decide
 how to group tasks, though different models or objectives are usually grouped into different projects.
 
-Tasks that are in the system can be accessed and utilized with code. To [access a task](../clearml_sdk/task_sdk.md#accessing-tasks), it can be identified either by a 
-project name & task name combination or by a unique ID. 
+Tasks can be accessed and utilized with code. [Access a task](../clearml_sdk/task_sdk.md#accessing-tasks) by 
+specifying project name & task name combination or by a unique ID. 
 
-It's possible to copy ([clone](../webapp/webapp_exp_reproducing.md)) a task multiple times and to modify it for re-execution.  
+It's possible to create copies of a task ([clone](../webapp/webapp_exp_reproducing.md)) then execute them with 
+[ClearML Agent](../clearml_agent.md). When an agent executes a task, it uses the specified configuration to:
+
+* Install required Python packages
+* Apply code patches
+* Set hyperparameter and run-time configuration values
+
+Modifying a task clone's configuration will have the executing ClearML agent override the original values:
+* Modified package requirements will have the experiment script run with updated packages.
+* Modified recorded command line arguments will have the ClearML agent inject the new values in their stead
+* Code-level configuration instrumented with [`Task.connect`](../references/sdk/task.md#connect) will be overridden by 
+modified hyperparameters.
+ 
+
+
 
 ![Task](../img/fundamentals_task.png)
 
@@ -112,7 +126,7 @@ Available task types are:
 * *optimizer* - A specific type of controller for optimization tasks (e.g. [hyperparameter optimization](hpo.md))
 * *service* - Long lasting or recurring service (e.g. server cleanup, auto ingress, sync services etc.)
 * *monitor* - A specific type of service for monitoring
-* *application* - A task implementing custom applicative logic, like [auto-scaler](../guides/services/aws_autoscaler.md) 
+* *application* - A task implementing custom applicative logic, like [autoscaler](../guides/services/aws_autoscaler.md) 
   or [clearml-session](../apps/clearml_session.md)
 * *data_processing* - Any data ingress / preprocessing (see [ClearML Data](../clearml_data/clearml_data.md))
 * *qc* - Quality Control (e.g. evaluating model performance vs. blind dataset)
