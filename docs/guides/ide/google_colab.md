@@ -2,13 +2,13 @@
 title: ClearML Agent on Google Colab
 ---
 
-[Google Colab](https://colab.research.google.com) is a common development environment for data scientists. It offers a convenient IDE as well as
+[Google Colab](https://colab.research.google.com) is a common development environment for data scientists. It supports a convenient IDE as well as
 compute provided by google.
 
 Users can transform a Google Colab instance into an available resource in ClearML using [ClearML Agent](../../clearml_agent.md).
 
 This tutorial goes over how to create a ClearML worker node in a Google Colab notebook. Once the worker is up 
-and running, users can send Tasks to be executed on the Google Colab's HW.
+and running, users can send Tasks to be executed on Google Colab's HW.
 
 ## Prerequisites
 * Be signed up for ClearML (Or have a server deployed).

@@ -32,10 +32,15 @@ The profile tab presents user information.
 ### Customizing UI Behavior
 
 Under **USER PREFERENCES**, users can set a few web UI options:
-* **Show Hidden Projects** - Show ClearML infrastructure projects alongside your own projects. Disabled by default.
+* **Show Hidden Projects** - Show ClearML infrastructure projects alongside your own projects. Disabled by default. When 
+enabled, these projects are labeled with <img src="/docs/latest/icons/ico-ghost.svg" alt="Hidden project" className="icon size-md space-sm" />.
+* **Don't show ClearML Examples** - Hide the preloaded ClearML example content (project, pipeline, dataset, etc.) 
 * **HiDPI browser scale override** - Adjust scaling on High-DPI monitors to improve the web UI experience. 
   Enabled by default.
 * **Don't show pro tips periodically** - Stop showing ClearML usage tips on login. Disabled by default.
+* **Hide specific container arguments** - Specify which Docker environment variable values should be hidden in logs. 
+When printed, the variable values are replaced with `********`. By default, `CLEARML_API_SECRET_KEY`, `CLEARML_AGENT_GIT_PASS`,
+`AWS_SECRET_ACCESS_KEY`, and `AZURE_STORAGE_KEY` values are redacted.  
 
 :::info Self-hosted ClearML Server 
 The self-hosted ClearML Server has an additional option to enable sharing anonymous telemetry data with the ClearML 
@@ -201,7 +206,7 @@ The system includes three pre-configured groups that can't be removed:
   permissions to workspace resources
 * `Queue admins` -  Can create / delete / rename queues
 
-The user group table lists all the active user groups. Each row includes a group's name, description, and member list. 
+The user group table lists all the active user groups. Each row includes a group's name, description, member list, and ID. 
 
 ![User Management Page](../img/settings_user_management_table.png)
 

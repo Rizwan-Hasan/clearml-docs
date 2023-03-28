@@ -79,16 +79,21 @@ module.exports = {
               to: '/docs/references/sdk/task',
             },
             {
-              label: 'Hyper-Datasets',
-              to: '/docs/references/hyperdataset',
+              label: 'ClearML Agent',
+              to: '/docs/clearml_agent/clearml_agent_ref',
             },
             {
               label: 'Server API',
               to: '/docs/references/api',
             },
             {
+              label: 'Hyper-Datasets',
+              to: '/docs/references/hyperdataset',
+            },
+
+            {
               label: 'Release Notes',
-              to: '/docs/release_notes/ver_1_9',
+              to: '/docs/release_notes/ver_1_10',
             },
             {
               label: 'Community Resources',
@@ -102,7 +107,7 @@ module.exports = {
           to: '/docs/faq'
         },
         {
-          href: 'https://join.slack.com/t/clearml/shared_invite/zt-1kvcxu5hf-SRH_rmmHdLL7l2WadRJTQg',
+          href: 'https://join.slack.com/t/clearml/shared_invite/zt-1rp61f0cg-Bu_7UlETQrvHHjw~hEBh5A',
           position: 'right',
           className: 'header-ico header-ico--slack',
           'aria-label': 'Slack Channel',
@@ -135,10 +140,10 @@ module.exports = {
           items: [
             {
               label: 'Slack',
-              href: 'https://join.slack.com/t/clearml/shared_invite/zt-1kvcxu5hf-SRH_rmmHdLL7l2WadRJTQg',
+              href: 'https://join.slack.com/t/clearml/shared_invite/zt-1rp61f0cg-Bu_7UlETQrvHHjw~hEBh5A',
             },
             {
-              label: 'Youtube',
+              label: 'YouTube',
               href: 'https://www.youtube.com/c/ClearML',
             },
             {

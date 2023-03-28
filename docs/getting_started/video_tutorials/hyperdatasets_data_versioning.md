@@ -17,8 +17,9 @@ keywords: [mlops, components, hyperdatasets]
 </iframe>
 </div>
 
-### Video Transcript 
+<br/>
 
+<Collapsible type="info" title="Video Transcript">
 Hello and welcome to ClearML. In this video, we're taking a closer look at Hyper-Datasets, a supercharged version of ClearML Data.
 
 Hyper-Datasets is a data management system that’s designed for unstructured data like text, audio, or visual data. It is part of the ClearML paid offering, which means it brings along quite a bit of upgrades over the open source `clearml-data`.
@@ -71,5 +72,6 @@ After the remote machine has executed the experiment on the new dataview, we can
 
 If you’ve been following along with the other Getting Started videos, you should already start to see the potential this approach can have. For example: we could now run hyperparameter optimization on the data itself, because all of the filters and settings previously shown are just parameters on a task. The whole process could be running in parallel on a cloud autoscaler for example. Imagine finding the best training data confidence threshold for each class to optimize the model performance.
 
-If you’re interested in using Hyper-Datasets for your team, then contact us using our website, and we’ll get you going in no time. In the meantime, you can enjoy the power of the open source components at [app.clear.ml](https://app.clear.ml), and don’t forget to join our [Slack Channel](https://join.slack.com/t/clearml/shared_invite/zt-1kvcxu5hf-SRH_rmmHdLL7l2WadRJTQg), if you need any help!
+If you’re interested in using Hyper-Datasets for your team, then contact us using our website, and we’ll get you going in no time. In the meantime, you can enjoy the power of the open source components at [app.clear.ml](https://app.clear.ml), and don’t forget to join our [Slack Channel](https://join.slack.com/t/clearml/shared_invite/zt-1rp61f0cg-Bu_7UlETQrvHHjw~hEBh5A), if you need any help!
 
+</Collapsible>
